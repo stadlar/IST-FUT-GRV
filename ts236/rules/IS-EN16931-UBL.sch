@@ -71,7 +71,7 @@
 <!-- status draft -->
 			<assert 
 				id="IS-R-009"
-				test="exist(cbc:DueDate)"
+				test="exists(cbc:DueDate)"
 				flag="fatal">If seller is icelandic and invoice contains reference type 71 invoice must have due date — Ef seljandi er íslenskur þá skal reikningur sem inniheldur eindaga (BT-122, DocumentTypeCode = 71) einnig hafa gjalddaga (BT-9).</assert>
 <!-- status draft -->
 			<assert 
