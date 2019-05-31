@@ -62,7 +62,7 @@
 
 		</rule>
 
-		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS'] and cac:AdditionalDocumentReference/cbc:DocumentTypeCode = '71'">
+		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS' and cac:AdditionalDocumentReference/cbc:DocumentTypeCode = '71']">
 <!-- status draft -->
 			<assert 
 				id="IS-R-008"
