@@ -81,7 +81,7 @@
 				
 		</rule>
 
-		<rule context="(cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS']) and (cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS')">
+		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS' and cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS']">
 <!-- status draft -->
 			<assert 
 				id="IS-R-004"
