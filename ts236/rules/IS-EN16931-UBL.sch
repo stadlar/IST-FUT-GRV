@@ -62,7 +62,7 @@
 
 		</rule>
 
-		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS'] and cac:AdditionalDocumentReference/cbc:DocumentTypeCode = '71'">
+		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS' and cac:AdditionalDocumentReference/cbc:DocumentTypeCode = '71']">
 <!-- status draft -->
 			<assert 
 				id="IS-R-008"
@@ -71,7 +71,7 @@
 <!-- status draft -->
 			<assert 
 				id="IS-R-009"
-				test="exist(cbc:DueDate)"
+				test="exists(cbc:DueDate)"
 				flag="fatal">If seller is icelandic and invoice contains reference type 71 invoice must have due date — Ef seljandi er íslenskur þá skal reikningur sem inniheldur eindaga (BT-122, DocumentTypeCode = 71) einnig hafa gjalddaga (BT-9).</assert>
 <!-- status draft -->
 			<assert 
@@ -81,7 +81,7 @@
 				
 		</rule>
 
-		<rule context="(cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS']) and (cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS')">
+		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS' and cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS']">
 <!-- status draft -->
 			<assert 
 				id="IS-R-004"
