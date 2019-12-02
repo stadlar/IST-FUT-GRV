@@ -11,58 +11,46 @@
 	<ns uri="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
 	<ns uri="utils" prefix="u"/>
 
-	<let name="supplierCountry"
-		value="
-			if (/*/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme[cac:TaxScheme/cbc:ID = 'VAT']/substring(cbc:CompanyID, 1, 2)) then
-				upper-case(normalize-space(/*/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme[cac:TaxScheme/cbc:ID = 'VAT']/substring(cbc:CompanyID, 1, 2)))
-			else
-			if (/*/cac:TaxRepresentativeParty/cac:PartyTaxScheme[cac:TaxScheme/cbc:ID = 'VAT']/substring(cbc:CompanyID, 1, 2)) then
-				upper-case(normalize-space(/*/cac:TaxRepresentativeParty/cac:PartyTaxScheme[cac:TaxScheme/cbc:ID = 'VAT']/substring(cbc:CompanyID, 1, 2)))
-			else
-				if (/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode) then
-					upper-case(normalize-space(/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode))
-			else
-				'XX'"/>
-
-  <!-- ICELAND -->
 	<pattern>
 
-		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS']">
-
-<!-- status draft -->
-		<assert 
+		<rule context="ubl-invoice:Invoice[cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS']">
+		<!-- status draft -->
+			<assert 
 				id="IS-R-001"
-				test="( ( not(contains(normalize-space(.),' ')) and contains( ' 380 381 ',concat(' ',normalize-space(.),' ') ) ) )"
+				test="( ( not(contains(normalize-space(cbc:InvoiceTypeCode),' ')) and contains( ' 380 381 ',concat(' ',normalize-space(cbc:InvoiceTypeCode),' ') ) ) )"
 				flag="warning">If seller is icelandic then invoice type should be 380 or 381 — Ef seljandi er íslenskur þá ætti gerð reiknings (BT-3) að vera sölureikningur (380) eða kreditreikningur (381).</assert>
-<!-- status draft -->
+
+		<!-- status draft -->
 			<assert 
 				id="IS-R-002"
 				test="exists(cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID) and cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID = '0196'"
 				flag="fatal">If seller is icelandic then it shall contain sellers legal id — Ef seljandi er íslenskur þá skal reikningur innihalda íslenska kennitölu seljanda (BT-30).</assert>
 
-<!-- status draft -->
+		<!-- status draft -->
 			<assert 
 				id="IS-R-003"
-				test="exists(cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName) and exists(cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone)"
+				test="exists(cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName) and exists(cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone)"
 				flag="fatal">If seller is icelandic then it shall contain his address with street name and zip code — Ef seljandi er íslenskur þá skal heimilisfang seljanda innihalda götuheiti og póstnúmer (BT-35 og BT-38).</assert>
 
-<!-- status draft -->				
+		<!-- status draft -->
 			<assert 
 				id="IS-R-006"
-				test="exists(cac:PaymentMeans[cbc:PaymentMeansCode = &apos;9&apos;]/cac:PayeeFinancialAccount/cbc:ID) 
-					  and string-length(normalize-space(cac:PaymentMeans[cbc:PaymentMeansCode = &apos;9&apos;]/cac:PayeeFinancialAccount/cbc:ID)) = 12"
+				test="exists(cac:PaymentMeans[cbc:PaymentMeansCode = '9']/cac:PayeeFinancialAccount/cbc:ID) 
+					  and string-length(normalize-space(cac:PaymentMeans[cbc:PaymentMeansCode = '9']/cac:PayeeFinancialAccount/cbc:ID)) = 12
+					  or not(exists(cac:PaymentMeans[cbc:PaymentMeansCode = '9']))"
 				flag="fatal">If seller is icelandic and payment means code is 9 then a 12 digit account id must exist  — Ef seljandi er íslenskur og greiðslumáti (BT-81) er millifærsla (kóti 9) þá skal koma fram 12 stafa reikningnúmer (BT-84)</assert>
 
-<!-- status draft -->
+		<!-- status draft -->
 			<assert 
 				id="IS-R-007"
-				test="exists(cac:PaymentMeans[cbc:PaymentMeansCode = &apos;42&apos;]/cac:PayeeFinancialAccount/cbc:ID) 
-					  and string-length(normalize-space(cac:PaymentMeans[cbc:PaymentMeansCode = &apos;42&apos;]/cac:PayeeFinancialAccount/cbc:ID)) = 12"
+				test="exists(cac:PaymentMeans[cbc:PaymentMeansCode = '42']/cac:PayeeFinancialAccount/cbc:ID) 
+					  and string-length(normalize-space(cac:PaymentMeans[cbc:PaymentMeansCode = '42']/cac:PayeeFinancialAccount/cbc:ID)) = 12
+					  or not(exists(cac:PaymentMeans[cbc:PaymentMeansCode = '42']))"
 				flag="fatal">If seller is icelandic and payment means code is 42 then a 12 digit account id must exist  — Ef seljandi er íslenskur og greiðslumáti (BT-81) er millifærsla (kóti 42) þá skal koma fram 12 stafa reikningnúmer (BT-84)</assert>
 
 		</rule>
 
-		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS' and cac:AdditionalDocumentReference/cbc:DocumentTypeCode = '71']">
+		<rule context="ubl-invoice:Invoice[cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS' and cac:AdditionalDocumentReference/cbc:DocumentTypeCode = '71']">
 <!-- status draft -->
 			<assert 
 				id="IS-R-008"
@@ -81,18 +69,18 @@
 				
 		</rule>
 
-		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'IS' and cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS']">
+		<rule context="ubl-invoice:Invoice[cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS' and cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS']">
 <!-- status draft -->
 			<assert 
 				id="IS-R-004"
 				test="exists(cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID) and cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID = '0196'"
-				flag="fatal">If seller and buyer are icelandic then  — Ef seljandi og kaupandi eru íslenskir þá skal reikningurinn innihalda íslenska kennitölu kaupanda (BT-47).</assert>
+				flag="fatal">If seller and buyer are icelandic then the invoice shall contain the buyers icelandic legal identifier — Ef seljandi og kaupandi eru íslenskir þá skal reikningurinn innihalda íslenska kennitölu kaupanda (BT-47).</assert>
 
 <!-- status draft -->
 			<assert 
 				id="IS-R-005"
 				test="exists(cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName) and exists(cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone)"
-				flag="fatal">If seller and buyer are icelandic then  — Ef seljandi og kaupandi eru íslenskir þá skal heimilisfang kaupanda innihalda götuheiti og póstnúmer (BT-50 og BT-53)</assert>
+				flag="fatal">If seller and buyer are icelandic then the invoice shall contain the buyers address with street name and zip code  — Ef seljandi og kaupandi eru íslenskir þá skal heimilisfang kaupanda innihalda götuheiti og póstnúmer (BT-50 og BT-53)</assert>
 
 		</rule>
 	</pattern>

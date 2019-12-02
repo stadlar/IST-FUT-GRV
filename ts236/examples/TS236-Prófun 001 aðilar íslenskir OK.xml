@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!-- 
+	Prófunarskrá fyrir íslenskar reglur í reikningi
+	Próf 001 — Aðilar íslenskri, Happy path
+	Niðurstaða: Án villu
+-->
+
+	<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID> <!-- BT-24 -->
+	<cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID> <!-- BT-225 -->
+	<cbc:ID>TOSL108</cbc:ID> <!-- BT-1 -->
+	<cbc:IssueDate>2018-07-01</cbc:IssueDate> <!-- BT-2 -->
+	<cbc:DueDate>2018-07-31</cbc:DueDate> <!-- BT-9 -->
+	<cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode> <!-- BT-3 -->
+	<cbc:DocumentCurrencyCode>ISK</cbc:DocumentCurrencyCode> <!-- BT-5 -->
+	<cbc:BuyerReference>123</cbc:BuyerReference> <!-- BT-10 -->
+	<cac:AccountingSupplierParty>
+		<cac:Party>
+			<cbc:EndpointID schemeID="0196">5203092330</cbc:EndpointID> <!-- BT-34, BT-34-1 -->
+			<cac:PartyName>
+				<cbc:Name>Sölufyrirtækið ehf.</cbc:Name> <!-- BT-28 -->
+			</cac:PartyName>
+			<cac:PostalAddress>
+				<cbc:StreetName>Hafnarstræti 112</cbc:StreetName> <!-- BT-35 -->
+				<cbc:CityName>Akureyri</cbc:CityName> <!-- BT-37 -->
+				<cbc:PostalZone>600</cbc:PostalZone> <!-- BT-38 -->
+				<cac:Country>
+					<cbc:IdentificationCode>IS</cbc:IdentificationCode> <!-- BT-40 -->
+				</cac:Country>
+			</cac:PostalAddress>
+			<cac:PartyTaxScheme>
+				<cbc:CompanyID>IS12345</cbc:CompanyID> <!-- BT-31 -->
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID> <!-- BT-31 -->
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>Yfirsölufyrirtækið ehf</cbc:RegistrationName> <!-- BT-27 -->
+				<cbc:CompanyID schemeID="0196">5203092330</cbc:CompanyID> <!-- BT-30, BT-30-1 -->
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:AccountingSupplierParty>
+	<cac:AccountingCustomerParty>
+		<cac:Party>
+			<cbc:EndpointID schemeID="0196">5402697509</cbc:EndpointID> <!-- BT-49, BT-49-1 -->
+			<cac:PartyName>
+				<cbc:Name>Kaupfyrirtækið ehf.</cbc:Name> <!-- BT-44 -->
+			</cac:PartyName>
+			<cac:PostalAddress>
+				<cbc:StreetName>Hafnarstræti 112</cbc:StreetName> <!-- BT-50 -->
+				<cbc:CityName>Reykjavík</cbc:CityName> <!-- BT-52 -->
+				<cbc:PostalZone>101</cbc:PostalZone> <!-- BT-53 -->
+				<cac:Country>
+					<cbc:IdentificationCode>IS</cbc:IdentificationCode> <!-- BT-55 -->
+				</cac:Country>
+			</cac:PostalAddress>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>Yfirkaupafyrirtækið ehf.</cbc:RegistrationName> <!-- BT-45 -->
+				<cbc:CompanyID schemeID="0196">5402697509</cbc:CompanyID> <!-- BT-47, BT-47-1 -->
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:AccountingCustomerParty>
+	<cac:PaymentMeans>
+		<cbc:PaymentMeansCode>42</cbc:PaymentMeansCode> <!-- BT-82, BT-81 -->
+		<cbc:PaymentID>gr12345</cbc:PaymentID> <!-- BT-83 -->
+		<cac:PayeeFinancialAccount>
+			<cbc:ID>000166000001</cbc:ID> <!-- BT-84 -->
+		</cac:PayeeFinancialAccount>
+	</cac:PaymentMeans>
+	<cac:AllowanceCharge>
+		<cbc:ChargeIndicator>true</cbc:ChargeIndicator> <!-- UBL qualifier -->
+		<cbc:AllowanceChargeReason>Flutningskostnaður</cbc:AllowanceChargeReason> <!-- BT-97, BT-104 -->
+		<cbc:Amount currencyID="ISK">37000.00</cbc:Amount> <!-- BT-92, BT-99 -->
+		<cac:TaxCategory>
+			<cbc:ID>S</cbc:ID> <!-- BT-95, BT-102 -->
+				<cbc:Percent>11</cbc:Percent> <!-- BT-96, BT-103  -->
+			<cac:TaxScheme>
+				<cbc:ID>VAT</cbc:ID>
+			</cac:TaxScheme>
+		</cac:TaxCategory>
+	</cac:AllowanceCharge>
+	<cac:TaxTotal>
+		<cbc:TaxAmount currencyID="ISK">89713.37</cbc:TaxAmount> <!-- BT-110 -->
+		<cac:TaxSubtotal>
+			<cbc:TaxableAmount currencyID="ISK">356847.39</cbc:TaxableAmount> <!-- BT-116 -->
+			<cbc:TaxAmount currencyID="ISK">85643.37</cbc:TaxAmount> <!-- BT-117 -->
+			<cac:TaxCategory>
+				<cbc:ID>S</cbc:ID> <!-- BT-118 -->
+				<cbc:Percent>24</cbc:Percent> <!-- BT-119 -->
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID> <!-- qualifier -->
+				</cac:TaxScheme>
+			</cac:TaxCategory>
+		</cac:TaxSubtotal>
+		<cac:TaxSubtotal>
+			<cbc:TaxableAmount currencyID="ISK">37000.00</cbc:TaxableAmount> <!-- BT-116 -->
+			<cbc:TaxAmount currencyID="ISK">4070.00</cbc:TaxAmount> <!-- BT-117 -->
+			<cac:TaxCategory>
+				<cbc:ID>S</cbc:ID> <!-- BT-118 -->
+				<cbc:Percent>11</cbc:Percent> <!-- BT-119 -->
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID> <!-- qualifier -->
+				</cac:TaxScheme>
+			</cac:TaxCategory>
+		</cac:TaxSubtotal>		
+	</cac:TaxTotal>
+	<cac:LegalMonetaryTotal>
+		<cbc:LineExtensionAmount currencyID="ISK">356847.39</cbc:LineExtensionAmount> <!-- BT-106 -->
+		<cbc:TaxExclusiveAmount currencyID="ISK">393847.39</cbc:TaxExclusiveAmount> <!-- BT-109 -->
+		<cbc:TaxInclusiveAmount currencyID="ISK">483560.76</cbc:TaxInclusiveAmount> <!-- BT-112 -->
+		<cbc:ChargeTotalAmount currencyID="ISK">37000</cbc:ChargeTotalAmount> <!-- BT-108 -->
+		<cbc:PrepaidAmount currencyID="ISK">100000.00</cbc:PrepaidAmount> <!-- BT-116 -->
+		<cbc:PayableRoundingAmount currencyID="ISK">-0.76</cbc:PayableRoundingAmount> <!-- BT-114 -->
+		<cbc:PayableAmount currencyID="ISK">383560.00</cbc:PayableAmount> <!-- BT-115 -->
+	</cac:LegalMonetaryTotal>
+	<cac:InvoiceLine>
+		<cbc:ID>1</cbc:ID> <!-- BT-126 -->
+		<cbc:InvoicedQuantity unitCode="H87">1</cbc:InvoicedQuantity> <!-- BT-130, BT-129 -->
+		<cbc:LineExtensionAmount currencyID="ISK">356847.39</cbc:LineExtensionAmount> <!-- BT-131 -->
+		<cac:AllowanceCharge>
+			<cbc:ChargeIndicator>false</cbc:ChargeIndicator> <!-- qualifier -->
+			<cbc:AllowanceChargeReason>Rispa</cbc:AllowanceChargeReason> <!-- BT-139, BT-144 -->
+			<cbc:Amount currencyID="ISK">5000.00</cbc:Amount> <!-- BT-136, BT-141 -->
+		</cac:AllowanceCharge>
+		<cac:Item>
+			<cbc:Name>Ferðatölva</cbc:Name> <!-- BT-153 -->
+			<cac:SellersItemIdentification>
+				<cbc:ID>JB007</cbc:ID> <!-- BT-155 -->
+			</cac:SellersItemIdentification>
+			<cac:ClassifiedTaxCategory>
+				<cbc:ID>S</cbc:ID> <!-- BT-151 -->
+				<cbc:Percent>24</cbc:Percent> <!-- BT-152 -->
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:ClassifiedTaxCategory>
+		</cac:Item>
+		<cac:Price>
+			<cbc:PriceAmount currencyID="ISK">361847.39</cbc:PriceAmount> <!-- BT-146 -->
+		</cac:Price>
+	</cac:InvoiceLine>
+</Invoice>
