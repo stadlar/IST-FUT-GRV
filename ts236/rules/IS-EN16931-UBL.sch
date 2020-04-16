@@ -12,8 +12,10 @@
 	<ns uri="utils" prefix="u"/>
 
 	<pattern>
+		<let name="SupplierCountry" value="concat(ubl-creditnote:CreditNote/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode, ubl-invoice:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode)"/>
+		<let name="CustomerCountry" value="concat(ubl-creditnote:CreditNote/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode, ubl-invoice:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode)"/>
 
-		<rule context="ubl-invoice:Invoice[cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS']">
+		<rule context="ubl-creditnote:CreditNote[$SupplierCountry = 'IS'] | ubl-invoice:Invoice[$SupplierCountry = 'IS']">
 		<!-- status draft -->
 			<assert 
 				id="IS-R-001"
@@ -50,36 +52,36 @@
 
 		</rule>
 
-		<rule context="ubl-invoice:Invoice[cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS' and cac:AdditionalDocumentReference/cbc:DocumentTypeCode = '71']">
+		<rule context="cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71' and $SupplierCountry = 'IS']">
 <!-- status draft -->
 			<assert 
 				id="IS-R-008"
-				test="string-length(cac:AdditionalDocumentReference/cbc:ID) = 10 and (string(.) castable as xs:date)"
+				test="string-length(cbc:ID) = 10 and (string(.) castable as xs:date)"
 				flag="fatal">If seller is icelandic and invoice contains reference type 71 then the id form must be YYYY-MM-DD — Ef seljandi er íslenskur þá skal eindagi (BT-122, tegundarkóti 71) vera á forminu YYYY-MM-DD.</assert>
 <!-- status draft -->
 			<assert 
 				id="IS-R-009"
-				test="exists(cbc:DueDate)"
+				test="exists(Invoice/cbc:DueDate)"
 				flag="fatal">If seller is icelandic and invoice contains reference type 71 invoice must have due date — Ef seljandi er íslenskur þá skal reikningur sem inniheldur eindaga (BT-122, DocumentTypeCode = 71) einnig hafa gjalddaga (BT-9).</assert>
 <!-- status draft -->
 			<assert 
 				id="IS-R-010"
-				test="(cbc:DueDate) &lt;= (cac:AdditionalDocumentReference/cbc:ID)"
+				test="(Invoice/cbc:DueDate) &lt;= (cbc:ID)"
 				flag="fatal">If seller is icelandic and invoice contains reference type 71 the id date must be same or later than due date — Ef seljandi er íslenskur þá skal eindagi (BT-122, DocumentTypeCode = 71) skal vera sami eða síðar en gjalddagi (BT-9) ef eindagi er til staðar.</assert>
 				
 		</rule>
 
-		<rule context="ubl-invoice:Invoice[cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS' and cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'IS']">
+		<rule context="ubl-creditnote:CreditNote[$SupplierCountry = 'IS' and $CustomerCountry = 'IS']/cac:AccountingCustomerParty | ubl-invoice:Invoice[$SupplierCountry = 'IS' and $CustomerCountry = 'IS']/cac:AccountingCustomerParty">
 <!-- status draft -->
 			<assert 
 				id="IS-R-004"
-				test="exists(cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID) and cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID = '0196'"
+				test="exists(cac:Party/cac:PartyLegalEntity/cbc:CompanyID) and cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID = '0196'"
 				flag="fatal">If seller and buyer are icelandic then the invoice shall contain the buyers icelandic legal identifier — Ef seljandi og kaupandi eru íslenskir þá skal reikningurinn innihalda íslenska kennitölu kaupanda (BT-47).</assert>
 
 <!-- status draft -->
 			<assert 
 				id="IS-R-005"
-				test="exists(cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName) and exists(cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone)"
+				test="exists(cac:Party/cac:PostalAddress/cbc:StreetName) and exists(cac:Party/cac:PostalAddress/cbc:PostalZone)"
 				flag="fatal">If seller and buyer are icelandic then the invoice shall contain the buyers address with street name and zip code  — Ef seljandi og kaupandi eru íslenskir þá skal heimilisfang kaupanda innihalda götuheiti og póstnúmer (BT-50 og BT-53)</assert>
 
 		</rule>
