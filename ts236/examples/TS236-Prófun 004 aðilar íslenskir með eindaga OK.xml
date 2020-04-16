@@ -3,32 +3,20 @@
 
 <!-- 
 	Prófunarskrá fyrir íslenskar reglur í reikningi
-	Próf 003 — Aðilar íslenskri, íslenskar reglur brotnar en ekki Peppol.
-
-	IS-R-001 - Invoice type set sem 393
-	IS-R-002 - Kennitala seljanda commentuð út.
-	IS-R-003 - Götuheiti og póstnúmer seljanda commentað út.
-	IS-R-004 - Kennitala kaupanda commentuð út.
-	IS-R-005 - Götuheiti og póstnúmer kaupanda commentað út.
-	IS-R-006 - Greiðslumáti 9 með of stutt account númer
-	IS-R-007 - Regla ekki prófuð saman með reglu 006.
-	IS-R-008 - Eindagi ekki af réttu formatti
-	IS-R-009 - Gjalddagi kommentaður út
-	IS-R-010 - Gjalddagi kommentaður út
-	
-	Niðurstaða: Villur IS-R-001, IS-R-002, IS-R-003, IS-R-006, IS-R-008, IS-R-009, IS-R-010, IS-R-004, IS-R-005
+	Próf 004 — Aðilar íslenskir, Eindagi og annað í AdditionalDocumentReference, Happy path
+	Niðurstaða: Án villu
 -->
 
 	<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID> <!-- BT-24 -->
 	<cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID> <!-- BT-225 -->
 	<cbc:ID>TOSL108</cbc:ID> <!-- BT-1 -->
 	<cbc:IssueDate>2018-07-01</cbc:IssueDate> <!-- BT-2 -->
-	<!--<cbc:DueDate>2018-07-31</cbc:DueDate>  BT-9 -->
-	<cbc:InvoiceTypeCode>393</cbc:InvoiceTypeCode> <!-- BT-3 -->
+	<cbc:DueDate>2018-07-31</cbc:DueDate> <!-- BT-9 -->
+	<cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode> <!-- BT-3 -->
 	<cbc:DocumentCurrencyCode>ISK</cbc:DocumentCurrencyCode> <!-- BT-5 -->
 	<cbc:BuyerReference>123</cbc:BuyerReference> <!-- BT-10 -->
 	<cac:AdditionalDocumentReference>
-		<cbc:ID>2018807-25</cbc:ID>
+		<cbc:ID>2018-08-25</cbc:ID>
 		<cbc:DocumentTypeCode>71</cbc:DocumentTypeCode>
 	</cac:AdditionalDocumentReference>
 	<cac:AdditionalDocumentReference>
@@ -42,9 +30,9 @@
 				<cbc:Name>Sölufyrirtækið ehf.</cbc:Name> <!-- BT-28 -->
 			</cac:PartyName>
 			<cac:PostalAddress>
-				<!-- <cbc:StreetName>Hafnarstræti 112</cbc:StreetName> -->
+				<cbc:StreetName>Hafnarstræti 112</cbc:StreetName> <!-- BT-35 -->
 				<cbc:CityName>Akureyri</cbc:CityName> <!-- BT-37 -->
-				<!-- <cbc:PostalZone>600</cbc:PostalZone> -->
+				<cbc:PostalZone>600</cbc:PostalZone> <!-- BT-38 -->
 				<cac:Country>
 					<cbc:IdentificationCode>IS</cbc:IdentificationCode> <!-- BT-40 -->
 				</cac:Country>
@@ -57,7 +45,7 @@
 			</cac:PartyTaxScheme>
 			<cac:PartyLegalEntity>
 				<cbc:RegistrationName>Yfirsölufyrirtækið ehf</cbc:RegistrationName> <!-- BT-27 -->
-				<!-- <cbc:CompanyID schemeID="0196">5203092330</cbc:CompanyID> -->
+				<cbc:CompanyID schemeID="0196">5203092330</cbc:CompanyID> <!-- BT-30, BT-30-1 -->
 			</cac:PartyLegalEntity>
 		</cac:Party>
 	</cac:AccountingSupplierParty>
@@ -68,7 +56,7 @@
 				<cbc:Name>Kaupfyrirtækið ehf.</cbc:Name> <!-- BT-44 -->
 			</cac:PartyName>
 			<cac:PostalAddress>
-				<!--<cbc:StreetName>Hafnarstræti 112</cbc:StreetName>  BT-50 -->
+				<cbc:StreetName>Hafnarstræti 112</cbc:StreetName> <!-- BT-50 -->
 				<cbc:CityName>Reykjavík</cbc:CityName> <!-- BT-52 -->
 				<cbc:PostalZone>101</cbc:PostalZone> <!-- BT-53 -->
 				<cac:Country>
@@ -77,27 +65,17 @@
 			</cac:PostalAddress>
 			<cac:PartyLegalEntity>
 				<cbc:RegistrationName>Yfirkaupafyrirtækið ehf.</cbc:RegistrationName> <!-- BT-45 -->
-				<!-- <cbc:CompanyID schemeID="0196">5402697509</cbc:CompanyID> -->
+				<cbc:CompanyID schemeID="0196">5402697509</cbc:CompanyID> <!-- BT-47, BT-47-1 -->
 			</cac:PartyLegalEntity>
 		</cac:Party>
 	</cac:AccountingCustomerParty>
 	<cac:PaymentMeans>
-		<cbc:PaymentMeansCode>9</cbc:PaymentMeansCode> <!-- BT-82, BT-81 -->
-		<cbc:PaymentID>gr12345</cbc:PaymentID> <!-- BT-83 -->
-		<cac:PayeeFinancialAccount>
-			<cbc:ID>1234</cbc:ID> <!-- BT-84 -->
-		</cac:PayeeFinancialAccount>
-	</cac:PaymentMeans>
-	<cac:PaymentMeans>
 		<cbc:PaymentMeansCode>42</cbc:PaymentMeansCode> <!-- BT-82, BT-81 -->
 		<cbc:PaymentID>gr12345</cbc:PaymentID> <!-- BT-83 -->
 		<cac:PayeeFinancialAccount>
-			<cbc:ID>1234</cbc:ID> <!-- BT-84 -->
+			<cbc:ID>000166000001</cbc:ID> <!-- BT-84 -->
 		</cac:PayeeFinancialAccount>
 	</cac:PaymentMeans>
-	<cac:PaymentTerms>
-		<cbc:Note>This is a note</cbc:Note>
-	</cac:PaymentTerms>
 	<cac:AllowanceCharge>
 		<cbc:ChargeIndicator>true</cbc:ChargeIndicator> <!-- UBL qualifier -->
 		<cbc:AllowanceChargeReason>Flutningskostnaður</cbc:AllowanceChargeReason> <!-- BT-97, BT-104 -->
