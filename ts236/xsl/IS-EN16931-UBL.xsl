@@ -208,7 +208,7 @@
 
 	  <!--RULE -->
    <xsl:template match="ubl-creditnote:CreditNote[$SupplierCountry = 'IS'] | ubl-invoice:Invoice[$SupplierCountry = 'IS']"
-                 priority="1002"
+                 priority="1001"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="ubl-creditnote:CreditNote[$SupplierCountry = 'IS'] | ubl-invoice:Invoice[$SupplierCountry = 'IS']"/>
@@ -292,22 +292,13 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71' and $SupplierCountry = 'IS']"
-                 priority="1001"
-                 mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71' and $SupplierCountry = 'IS']"/>
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="string-length(cbc:ID) = 10 and (string(.) castable as xs:date)"/>
+         <xsl:when test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and string-length(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) = 10 and (string(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) castable as xs:date)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="string-length(cbc:ID) = 10 and (string(.) castable as xs:date)">
+                                test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and string-length(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) = 10 and (string(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) castable as xs:date)">
                <xsl:attribute name="id">IS-R-008</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -320,10 +311,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="exists(Invoice/cbc:DueDate)"/>
+         <xsl:when test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and exists(cbc:DueDate)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(Invoice/cbc:DueDate)">
+                                test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and exists(cbc:DueDate)">
                <xsl:attribute name="id">IS-R-009</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -336,10 +327,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="(Invoice/cbc:DueDate) &lt;= (cbc:ID)"/>
+         <xsl:when test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and (cbc:DueDate) &lt;= (cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(Invoice/cbc:DueDate) &lt;= (cbc:ID)">
+                                test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and (cbc:DueDate) &lt;= (cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID)">
                <xsl:attribute name="id">IS-R-010</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">

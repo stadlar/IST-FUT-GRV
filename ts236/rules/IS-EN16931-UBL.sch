@@ -49,28 +49,24 @@
 					  and string-length(normalize-space(cac:PaymentMeans[cbc:PaymentMeansCode = '42']/cac:PayeeFinancialAccount/cbc:ID)) = 12
 					  or not(exists(cac:PaymentMeans[cbc:PaymentMeansCode = '42']))"
 				flag="fatal">[IS-R-007]-If seller is icelandic and payment means code is 42 then a 12 digit account id must exist  — Ef seljandi er íslenskur og greiðslumáti (BT-81) er millifærsla (kóti 42) þá skal koma fram 12 stafa reikningnúmer (BT-84)</assert>
-
-		</rule>
-
-		<rule context="cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71' and $SupplierCountry = 'IS']">
+				
 <!-- status draft -->
 			<assert 
 				id="IS-R-008"
-				test="string-length(cbc:ID) = 10 and (string(.) castable as xs:date)"
+				test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and string-length(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) = 10 and (string(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) castable as xs:date)"
 				flag="fatal">[IS-R-008]-If seller is icelandic and invoice contains reference type 71 then the id form must be YYYY-MM-DD — Ef seljandi er íslenskur þá skal eindagi (BT-122, tegundarkóti 71) vera á forminu YYYY-MM-DD.</assert>
 <!-- status draft -->
 			<assert 
 				id="IS-R-009"
-				test="exists(Invoice/cbc:DueDate)"
+				test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and exists(cbc:DueDate)"
 				flag="fatal">[IS-R-009]-If seller is icelandic and invoice contains reference type 71 invoice must have due date — Ef seljandi er íslenskur þá skal reikningur sem inniheldur eindaga (BT-122, DocumentTypeCode = 71) einnig hafa gjalddaga (BT-9).</assert>
 <!-- status draft -->
 			<assert 
 				id="IS-R-010"
-				test="(Invoice/cbc:DueDate) &lt;= (cbc:ID)"
+				test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and (cbc:DueDate) &lt;= (cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID)"
 				flag="fatal">[IS-R-010]-If seller is icelandic and invoice contains reference type 71 the id date must be same or later than due date — Ef seljandi er íslenskur þá skal eindagi (BT-122, DocumentTypeCode = 71) skal vera sami eða síðar en gjalddagi (BT-9) ef eindagi er til staðar.</assert>
 				
 		</rule>
-
 		<rule context="ubl-creditnote:CreditNote[$SupplierCountry = 'IS' and $CustomerCountry = 'IS']/cac:AccountingCustomerParty | ubl-invoice:Invoice[$SupplierCountry = 'IS' and $CustomerCountry = 'IS']/cac:AccountingCustomerParty">
 <!-- status draft -->
 			<assert 
