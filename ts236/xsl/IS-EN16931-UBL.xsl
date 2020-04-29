@@ -295,10 +295,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and string-length(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) = 10 and (string(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) castable as xs:date)"/>
+         <xsl:when test="(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and string-length(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) = 10 and (string(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) castable as xs:date)) or not(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and string-length(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) = 10 and (string(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) castable as xs:date)">
+                                test="(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and string-length(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) = 10 and (string(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID) castable as xs:date)) or not(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']))">
                <xsl:attribute name="id">IS-R-008</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -311,10 +311,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and exists(cbc:DueDate)"/>
+         <xsl:when test="(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and exists(cbc:DueDate)) or not(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and exists(cbc:DueDate)">
+                                test="(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and exists(cbc:DueDate)) or not(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']))">
                <xsl:attribute name="id">IS-R-009</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -327,10 +327,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and (cbc:DueDate) &lt;= (cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID)"/>
+         <xsl:when test="(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and (cbc:DueDate) &lt;= (cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID)) or not(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and (cbc:DueDate) &lt;= (cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID)">
+                                test="(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']) and (cbc:DueDate) &lt;= (cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']/cbc:ID)) or not(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode = '71']))">
                <xsl:attribute name="id">IS-R-010</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
