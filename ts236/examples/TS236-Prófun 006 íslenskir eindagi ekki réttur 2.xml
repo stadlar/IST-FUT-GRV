@@ -22,7 +22,7 @@
 	<cbc:BuyerReference>123</cbc:BuyerReference> <!-- BT-10 -->
 	<cac:AdditionalDocumentReference>
 		<cbc:ID>2018807-25</cbc:ID>
-		<cbc:DocumentTypeCode>71</cbc:DocumentTypeCode>
+		<cbc:DocumentDescription>EINDAGI</cbc:DocumentDescription>
 	</cac:AdditionalDocumentReference>
 	<cac:AdditionalDocumentReference>
 		<cbc:ID>IS1234</cbc:ID>
