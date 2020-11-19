@@ -54,7 +54,7 @@
 	</cac:AdditionalDocumentReference>
 	<cac:AdditionalDocumentReference>
 		<cbc:ID>2018-08-31</cbc:ID>  <!-- BT-122 -->
-		<cbc:DocumentTypeCode>71</cbc:DocumentTypeCode>   <!-- 71 = Eindagi -->
+		<cbc:DocumentDescription>EINDAGI</cbc:DocumentDescription>   <!-- 71 = Eindagi -->
 	</cac:AdditionalDocumentReference>
 	<cac:ProjectReference>
 		<cbc:ID>321</cbc:ID> <!-- BT-11 -->
